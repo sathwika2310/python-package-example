@@ -31,7 +31,10 @@ pipeline {
 		'''
             }
         }
-
+	stage('Archive') {
+	    steps { 
+		archiveArtifacts artifacts: 'dist/*.whl'
+	}
     }
 
     post {
