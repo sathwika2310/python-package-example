@@ -31,13 +31,11 @@ pipeline {
 		'''
             }
         }
-	stage('Archive') {
-	    steps { 
-		'''
-  		   archiveArtifacts artifacts: 'dist/*.whl'
-       		'''
-	}
-    }
+	 stage('Archive Artifacts') {
+		steps {
+			 archiveArtifacts artifacts :'dist/.*whl'
+	            }
+	        }
 
     post {
         success {
