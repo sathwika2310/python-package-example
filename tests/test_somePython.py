@@ -1,6 +1,6 @@
 # tests/test_somePython.py
 
-from ../mypackage import somePython
+from mypackage import somePython
 
 def test_freezing_point():
     assert somePython.fahr_to_kelvin(32) == 273.15
