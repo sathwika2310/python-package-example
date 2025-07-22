@@ -27,8 +27,7 @@ pipeline {
         stage('Test Package') {
             steps {
                 sh '''
-		   pytest tests/ --junitxml=results.xml
-                   junit 'results.xml'
+		   pytest --cov-report html:cov.html tests/ 
 		'''
             }
         }
