@@ -31,20 +31,22 @@ pipeline {
 		'''
             }
         }
-	
+	    
+	stage('Archive Artifcats') {
+            steps {
+		   archiveArtifacts artifacts : 'dist/*.whl'
+            }
+        }
     post { 
-	always {
-		archiveArtifacts artifacts : 'dist/.*whl'
-	}
         success {
             echo 'Build completed successfully!'
         }
         failure {
             echo 'Build failed. Please check logs.'
         }
-    }
- }
-
+     }
+  }
 }
+
 	
 
