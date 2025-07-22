@@ -33,7 +33,7 @@ pipeline {
         }
 	 stage('Archive Artifacts') {
 		steps {
-			 archiveArtifacts artifacts :'dist/.*whl'
+			 archiveArtifacts artifacts : 'dist/.*whl'
 	            }
 	        }
 
