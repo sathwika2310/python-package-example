@@ -26,7 +26,9 @@ pipeline {
 
         stage('Test Package') {
             steps {
-                sh 'pytest tests/ --junitxml=results.xml'
+                sh ' 
+		export PYTHONPATH=.
+		pytest tests/ --junitxml=results.xml'
                 junit 'results.xml'
             }
         }
