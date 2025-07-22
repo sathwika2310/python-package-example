@@ -31,13 +31,11 @@ pipeline {
 		'''
             }
         }
-	 stage('Archive Artifacts') {
-		steps {
-			 archiveArtifacts artifacts : 'dist/.*whl'
-	            }
-	        }
-
-    post {
+	
+    post { 
+	always {
+            archiveArtifacts artifacts : 'dist/.*whl'
+        }	    
         success {
             echo 'Build completed successfully!'
         }
