@@ -3,41 +3,44 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
+        stage('Checkout SCM') {
             steps {
-                echo 'Cloning the GitHub repository...'
                 checkout scm
             }
         }
 
-        stage('Install Requirements') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Installing Python dependencies...'
-                sh 'pip3 install --upgrade pip setuptools wheel pytest numpy'
+                sh '''
+                    python3 -m pip install --upgrade pip
+                    pip install build pytest pytest-xml
+                '''
             }
         }
 
         stage('Build Package') {
             steps {
-                echo 'Building the Python package...'
-                sh 'python3 setup.py sdist bdist_wheel'
+                sh 'python3 -m build'
             }
         }
 
-        stage('Run Tests') {
+        stage('Test Package') {
             steps {
-                echo 'Running unit tests...'
-                sh 'pytest --junitxml=test-results.xml'
-            }
-        }
-
-        stage('Archive Artifacts') {
-            steps {
-                echo 'Saving build outputs...'
-                archiveArtifacts artifacts: 'dist/*.whl, dist/*.tar.gz, test-results.xml'
+                sh 'pytest tests/ --junitxml=results.xml'
+                junit 'results.xml'
             }
         }
 
     }
+
+    post {
+        success {
+            echo 'Build completed successfully!'
+        }
+        failure {
+            echo 'Build failed. Please check logs.'
+        }
+    }
 }
+
 
