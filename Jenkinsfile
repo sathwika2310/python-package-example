@@ -34,8 +34,8 @@ pipeline {
 	
     post { 
 	always {
-            archiveArtifacts artifacts : 'dist/.*whl'
-        }	    
+		archiveArtifacts artifacts : 'dist/.*whl'
+	}
         success {
             echo 'Build completed successfully!'
         }
@@ -43,6 +43,8 @@ pipeline {
             echo 'Build failed. Please check logs.'
         }
     }
-}
+ }
 
+}
+	
 
