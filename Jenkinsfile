@@ -37,6 +37,7 @@ pipeline {
 		   archiveArtifacts artifacts: 'dist/*.whl'
             }
         }
+    }
     post { 
         success {
             echo 'Build completed successfully!'
@@ -46,7 +47,6 @@ pipeline {
         }
      }
   }
-}
 
 	
 
