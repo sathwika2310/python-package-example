@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh '''
                     python3 -m pip install --upgrade pip
-                    pip install build pytest 
+                    pip install build pytest pytest-cov
                 '''
             }
         }
